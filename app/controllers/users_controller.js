@@ -13,7 +13,7 @@ const UsersController = {
     });
     const newUser = await user.save((err) =>{
       if(err){
-        response.bad_request(res,err);
+        response.badRequest(res,err);
         return;
       }
       const dataUser = (({username, email}) => ({username, email}))(user);
@@ -32,12 +32,12 @@ const UsersController = {
           let token = Jwt.sign({id_user: user.id}, process.env.SECRET_KEY, { expiresIn: '1h' });
           response.ok(res,{token: token});
         } else {
-          response.bad_request(res);
+          response.badRequest(res);
         }
       });
     })
     .catch(err => {
-      response.bad_request(res,{message: 'User not registered.'});
+      response.badRequest(res,{message: 'User not registered.'});
     });
   }
 }
