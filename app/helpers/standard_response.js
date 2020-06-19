@@ -21,21 +21,21 @@ exports.forbidden = (res) => {
   }).end();
 }
 
-exports.not_found = (res) => {
+exports.notFound = (res) => {
   res.status(404).send({
     'status': 404,
     'message': 'Not Found'
   }).end();
 }
 
-exports.no_content = (res) => {
+exports.noContent = (res) => {
   res.status(204).send({
     'status': 204,
     'message': 'No Content'
   }).end();
 }
 
-exports.bad_request = (res, values) => {
+exports.badRequest = (res, values) => {
   res.status(400).send({
     'status': 400,
     'message': 'Bad Request',
@@ -43,7 +43,7 @@ exports.bad_request = (res, values) => {
   }).end();
 }
 
-exports.internal_error = (res,values) => {
+exports.internalError = (res,values) => {
   res.status(500).send({
     'status': 500,
     'message': 'Internal server error',
