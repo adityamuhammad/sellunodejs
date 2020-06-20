@@ -7,8 +7,7 @@ let userSchema = mongoose.Schema({
   username:{
     type: String,
     required: true,
-    index: {unique: true},
-    unique: true
+    index: {unique: true}
   },
   email:{
     type: String,

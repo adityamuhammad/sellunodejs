@@ -13,9 +13,7 @@ app.use(cors());
 const TokenAuthorization = require('./app/middleware/token_authorization');
 
 app.use('/api/users', require('./app/routes/users.js'));
-app.get('/test', TokenAuthorization.verifyToken, function(req, res){
-  res.send('hello')
-});
+app.use('/api/products', require('./app/routes/products.js'));
 
 const server = app.listen(8081, () => {
   const host = server.address().address

@@ -6,18 +6,18 @@ require('dotenv').config();
 
 const UsersController = {
   register: async(req, res) => {
-    const user = new User({
+    let user = new User({
       username: req.body.username,
       password: req.body.password,
       email: req.body.email
     });
-    const newUser = await user.save((err) =>{
+    await user.save((err) =>{
       if(err){
         response.badRequest(res,err);
-        return;
+      } else {
+        let dataUser = (({username, email}) => ({username, email}))(user);
+        response.ok(res, dataUser);
       }
-      const dataUser = (({username, email}) => ({username, email}))(user);
-      response.ok(res, dataUser);
     });
   },
   login: (req, res) => {

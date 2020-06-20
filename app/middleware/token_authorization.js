@@ -8,7 +8,6 @@ const TokenAuthorization = {
       if (err) {
         response.unauthorized(res);
       } else {
-        req.body.id_user = results.id_user;
         next();
       }
     });
