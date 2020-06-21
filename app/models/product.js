@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 let productSchema = mongoose.Schema({
   name: {
@@ -12,13 +13,7 @@ let productSchema = mongoose.Schema({
   }
 }, {timestamps: true});
 
-productSchema.path('price').get((num) => {
-  return (num / 100).tofixed(2);
-});
-
-productSchema.path('price').set((num) => {
-  return num * 100
-});
+productSchema.plugin(uniqueValidator);
 
 const Product = mongoose.model('Product', productSchema);
 
