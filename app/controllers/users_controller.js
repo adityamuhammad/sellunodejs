@@ -30,7 +30,7 @@ const UsersController = {
           let token = Jwt.sign({username: user.username}, process.env.SECRET_KEY, { expiresIn: '1h' });
           return response.ok(res,{token: token});
         }
-        return response.badRequest(res);
+        return response.badRequest(res, {message: 'Invalid password.'});
       });
     })
     .catch(err => {

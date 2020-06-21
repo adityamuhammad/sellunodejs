@@ -41,7 +41,7 @@ describe('Products', () => {
   });
 
   describe('/POST', () => {
-    context('Without Authorization', () => {
+    context('without authorization', () => {
       it('it should be return 401 unauthorized', (done) => {
         chai.request(server)
           .post('/api/products')
@@ -52,8 +52,8 @@ describe('Products', () => {
           });
       });
     });
-    context('With Authorization', () => {
-      context('With invalid data', () => {
+    context('with Authorization', () => {
+      context('with invalid data', () => {
         it('it should be return 400 bad request due to validation error', (done) => {
           product.name = "";
           chai.request(server)
@@ -66,7 +66,7 @@ describe('Products', () => {
             });
         });
       });
-      context('With valid data', () => {
+      context('with valid data', () => {
         it('it should be data saved successfully.', (done) => {
           product.name = "Laptop Lenovo Thinkpad";
           chai.request(server)
@@ -91,7 +91,7 @@ describe('Products', () => {
   });
 
   describe('/GET/:id', () => {
-    context('With valid id', () => {
+    context('with valid id', () => {
       it('it should get a product by given id', (done) => {
         let productTest = new Product(product);
         productTest.save((err, product) => {
@@ -107,7 +107,7 @@ describe('Products', () => {
         });
       });
     });
-    context('With invalid id', () => {
+    context('with invalid id', () => {
       it('it should be send 404 response', (done) => {
         chai.request(server)
           .get('/api/products/' + '900')
@@ -120,7 +120,7 @@ describe('Products', () => {
   });
 
   describe('/PUT/:id', () => {
-    context('Without Authorization', () => {
+    context('without authorization', () => {
       it('it should raise unauthorized user', (done)=> {
         let productTest = new Product(product);
         productTest.save((err, product) => {
@@ -134,7 +134,7 @@ describe('Products', () => {
         });
       });
     });
-    context('With Authorization', () => {
+    context('with authorization', () => {
       it('it should be update a product given the id', (done)=> {
         let productTest = new Product(product);
         productTest.save((err, product) => {
@@ -154,7 +154,7 @@ describe('Products', () => {
     });
   });
   describe('/DELETE/:id', () => {
-    context('Without Authorization', () => {
+    context('without authorization', () => {
       it('it should raise unauthorized user', (done)=> {
         let productTest = new Product(product);
         productTest.save((err, product) => {
@@ -167,7 +167,7 @@ describe('Products', () => {
         });
       });
     });
-    context('With Authorization', () => {
+    context('with authorization', () => {
       it('it should delete a product by given id', (done)=> {
         let productTest = new Product(product);
         productTest.save((err, product) => {
