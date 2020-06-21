@@ -6,6 +6,7 @@ const TokenAuthorization = {
   verifyToken: (req, res, next) => {
     Jwt.verify(req.headers['authorization'], process.env.SECRET_KEY, (err, results) => {
       if (err) {
+        console.log(err);
         response.unauthorized(res);
       } else {
         next();

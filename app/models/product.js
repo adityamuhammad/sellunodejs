@@ -10,7 +10,7 @@ let productSchema = mongoose.Schema({
     type: Number,
     required: true
   }
-});
+}, {timestamps: true});
 
 productSchema.path('price').get((num) => {
   return (num / 100).tofixed(2);

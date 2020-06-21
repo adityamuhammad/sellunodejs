@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Aditya",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -18,5 +18,10 @@
     "mongoose": "^5.9.19",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5"
   }
 }
