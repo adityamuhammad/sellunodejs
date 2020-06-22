@@ -52,7 +52,7 @@ describe('Products', () => {
           });
       });
     });
-    context('with Authorization', () => {
+    context('with authorization', () => {
       context('with invalid data', () => {
         it('it should be return 400 bad request due to validation error', (done) => {
           product.name = "";
@@ -74,7 +74,7 @@ describe('Products', () => {
             .set({'Authorization': token})
             .send(product)
             .end((err, res) => {
-              res.should.have.status(200);
+              res.should.have.status(201);
               res.body.should.have.property('status');
               res.body.should.have.property('message');
               res.body.should.have.property('data');

@@ -3,30 +3,54 @@ const uniqueValidator = require('mongoose-unique-validator');
 const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 
-let userSchema = mongoose.Schema({
+let UserSchema = mongoose.Schema({
+  firstname: {
+    type: String,
+    required: 'Firstname is required.',
+    min: 5,
+    max:30
+  },
+  lastname: {
+    type: String,
+    required: 'Lastname is required.',
+    min: 5,
+    max:30
+  },
   username:{
     type: String,
-    required: true,
-    index: {unique: true}
+    required: 'Username is required.',
+    min: 5,
+    max:30,
+    index: true,
+    unique: 'Username not available.'
   },
   email:{
     type: String,
     trim: true,
     lowercase: true,
-    unique: true,
-    required: 'Email address is required',
+    unique: 'Email already exists.',
+    required: 'Email address is required.',
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please fill a valid email address'
+      'Please fill a valid email address.'
     ]
   },
   password: {
     type: String,
-    required: true
+    required: 'Password is required.',
+    min: 6
+  },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
+  },
+  isDeletedAccount: {
+    type: Boolean,
+    default: false
   }
 }, {timestamps: true});
 
-userSchema.pre('save', function(next) {
+UserSchema.pre('save', function(next) {
   const user = this;
 
   if (!user.isModified('password')) return next();
@@ -41,15 +65,15 @@ userSchema.pre('save', function(next) {
   });
 });
 
-userSchema.methods.comparePassword = function(candidatePassword, cb) {
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
     if (err) return cb(err);
     cb(null, isMatch);
   });
 };
 
-userSchema.plugin(uniqueValidator);
+UserSchema.plugin(uniqueValidator);
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

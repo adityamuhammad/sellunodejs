@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-let productSchema = mongoose.Schema({
+let ProductSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -10,11 +10,14 @@ let productSchema = mongoose.Schema({
   price: {
     type: Number,
     required: true
+  },
+  description: {
+    type: String
   }
 }, {timestamps: true});
 
-productSchema.plugin(uniqueValidator);
+ProductSchema.plugin(uniqueValidator);
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model('Product', ProductSchema);
 
 module.exports = Product;

@@ -6,6 +6,8 @@ const response = require('../helpers/standard_response.js');
 const UsersController = {
   register: async(req, res) => {
     let user = new User({
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
       username: req.body.username,
       password: req.body.password,
       email: req.body.email

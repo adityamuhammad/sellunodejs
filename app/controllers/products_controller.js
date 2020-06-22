@@ -58,7 +58,7 @@ const ProductsController = {
       if(err){
         return response.badRequest(res, err);
       }
-      return response.ok(res,product);
+      return response.created(res,product);
     });
   }
 }
