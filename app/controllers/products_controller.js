@@ -25,7 +25,7 @@ const ProductsController = {
     try {
       await Product.findOneAndUpdate(
         { _id: req.params.id },
-        { $set: { name: req.body.name, price: req.body.price }
+        { $set: { name: req.body.name, price: req.body.price, description: req.body.description }
         }, {new: true}, (err, data) => {
           if (err){
             return response.badRequest(res, err);
@@ -52,7 +52,8 @@ const ProductsController = {
   create: async (req, res) => {
     let product = new Product({
       name: req.body.name,
-      price: req.body.price
+      price: req.body.price,
+      description: req.body.description
     });
     await product.save((err) => {
       if(err){
