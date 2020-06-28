@@ -40,9 +40,28 @@ let UserSchema = mongoose.Schema({
     required: 'Password is required.',
     min: 6
   },
-  isEmailVerified: {
+  isActivatedAccount: {
     type: Boolean,
     default: false
+  },
+  lastLoggedIn: {
+    type: Date
+  },
+  activationToken: {
+    type: String,
+    default: null
+  },
+  activationTokenExpiredAt: {
+    type: Date,
+    default: null
+  },
+  resetPasswordToken: {
+    type: String,
+    default: null
+  },
+  resetPasswordTokenExpiredAt: {
+    type: Date,
+    default: null
   },
   isDeletedAccount: {
     type: Boolean,
@@ -60,6 +79,20 @@ UserSchema.pre('save', function(next) {
     bcrypt.hash(user.password, salt, function(err, hash) {
       if (err) return next(err);
       user.password = hash;
+      next();
+    });
+  });
+});
+
+UserSchema.pre('findOneAndUpdate', function(next) {
+  const update = this.getUpdate();
+  if (!update.hasOwnProperty('password')) return next();
+
+  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    if (err) return next(err);
+    bcrypt.hash(update.password, salt, function(err, hash) {
+      if (err) return next(err);
+      update.password = hash;
       next();
     });
   });

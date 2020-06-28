@@ -17,7 +17,8 @@ describe('Users', () => {
       lastname: 'aditya',
       username: 'aditya',
       email: 'aditya@gmail.com',
-      password: 'password'
+      password: 'password',
+      isActivatedAccount: true
     });
     user.save((err) => {
       if(err) throw err;
